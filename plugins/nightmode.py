@@ -13,7 +13,7 @@ from DONATE_ARMY_MUSIC.mongo.nightmodedb import (
     nightdb,
     nightmode_off,
     nightmode_on,
-)
+),
 
 CLOSE_CHAT=ChatPermissions(
     can_send_messages=False,
@@ -24,7 +24,7 @@ CLOSE_CHAT=ChatPermissions(
     can_add_web_page_previews=False,
     can_pin_messages=False,
     can_invite_users=True,
-)
+),
 
 
 OPEN_CHAT=ChatPermissions(
@@ -36,7 +36,7 @@ OPEN_CHAT=ChatPermissions(
     can_add_web_page_previews=True,
     can_pin_messages=True,
     can_invite_users=True,
-)
+),
 
 buttons = InlineKeyboardMarkup(
     [

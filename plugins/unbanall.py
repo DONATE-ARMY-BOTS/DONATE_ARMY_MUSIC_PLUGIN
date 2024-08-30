@@ -1,7 +1,7 @@
 from pyrogram import enums, filters
 
 from DONATE_ARMY_MUSIC import app
-from DONATE_ARMY_MUSIC.utils.branded_ban import admin_filter
+from DONATE_ARMY_MUSIC.utils.vip_ban import admin_filter
 
 BOT_ID = app.id
 

@@ -5,7 +5,7 @@ from pyrogram.types import *
 
 from DONATE_ARMY_MUSIC import app
 from DONATE_ARMY_MUSIC.misc import SUDOERS
-from DONATE_ARMY_MUSIC.utils.branded_ban import admin_filter
+from DONATE_ARMY_MUSIC.utils.vip_ban import admin_filter
 
 vip_text = [
     "hey please don't disturb me.",

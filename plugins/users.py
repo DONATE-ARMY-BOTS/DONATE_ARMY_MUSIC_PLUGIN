@@ -5,7 +5,7 @@ from time import time
 from pyrogram import filters
 
 from DONATE_ARMY_MUSIC import app
-from DONATE_ARMY_MUSIC.utils.branded_ban import admin_filter
+from DONATE_ARMY_MUSIC.utils.vip_ban import admin_filter
 
 # Define a dictionary to track the last message timestamp for each user
 user_last_message_time = {}

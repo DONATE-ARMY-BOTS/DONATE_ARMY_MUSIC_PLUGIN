@@ -30,7 +30,7 @@ async def echo(bot, message):
     try:
         text = message.text.split(" ", 1)[1]
     except IndexError:
-        return await message.reply_text("Example:\n\n`/figlet Yukki `")
+        return await message.reply_text("Example:\n\n`/figlet DONATE_ARMY `")
     kul_text, keyboard = figle(text)
     await message.reply_text(
         f"ʜᴇʀᴇ ɪs ʏᴏᴜʀ ғɪɢʟᴇᴛ :\n<pre>{kul_text}</pre>",

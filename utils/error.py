@@ -14,7 +14,7 @@ from functools import wraps
 from pyrogram.errors.exceptions.forbidden_403 import ChatWriteForbidden
 
 from config import LOG_GROUP_ID
-from DONATE_ARMY_MUSIC import app
+from VIPMUSIC import app
 
 
 def split_limits(text):

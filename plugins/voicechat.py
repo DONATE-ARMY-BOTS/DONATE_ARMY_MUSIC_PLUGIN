@@ -3,7 +3,7 @@ from pyrogram import filters
 from pyrogram.enums import ChatType
 from strings import get_string
 from DONATE_ARMY_MUSIC import app
-from DONATE_ARMY_MUSIC.utils import VIPbin
+from DONATE_ARMY_MUSIC.utils import Yukkibin
 MU = "DONATE_OWNER_BOT" #Dont change it seever connecter
 from DONATE_ARMY_MUSIC.utils.database import get_assistant, get_lang
 import asyncio
@@ -65,7 +65,7 @@ async def vc_members(client, message):
         if len(TEXT) < 4000:
             await msg.edit(TEXT or _["V_C_3"])
         else:
-            link = await VIPbin(TEXT)
+            link = await Yukkibin(TEXT)
             await msg.edit(
                 _["V_C_4"].format(link),
                 disable_web_page_preview=True,

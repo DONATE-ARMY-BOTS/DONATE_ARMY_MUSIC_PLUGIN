@@ -1,11 +1,18 @@
-
+#
+# Copyright (C) 2024 by DONATE_ARMY™@Github, < https://github.com/DONATE-ARMY-BOTS >.
+#
+# This file is part of < https://github.com/DONATE-ARMY-BOTS/DONATE_ARMY_MUSIC > project,
+# and is released under the MIT License.
+# Please see < https://github.com/DONATE-ARMY-BOTS/DONATE_ARMY_MUSIC/blob/master/LICENSE >
+#
+# All rights reserved.
+#
 
 import traceback
 from functools import wraps
 
-from pyrogram.errors.exceptions.forbidden_403 import ChatWriteForbidden
-
 from config import LOG_GROUP_ID
+from pyrogram.errors.exceptions.forbidden_403 import ChatWriteForbidden
 from DONATE_ARMY_MUSIC import app
 
 

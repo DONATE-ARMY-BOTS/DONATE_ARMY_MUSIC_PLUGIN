@@ -4,7 +4,6 @@ from traceback import format_exc as err
 
 from pyrogram.errors.exceptions.forbidden_403 import ChatWriteForbidden
 from pyrogram.types import Message
-
 from DONATE_ARMY_MUSIC import app
 from DONATE_ARMY_MUSIC.misc import SUDOERS
 

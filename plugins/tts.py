@@ -1,8 +1,8 @@
 import io
 
+from DONATE_ARMY_MUSIC import app
 from gtts import gTTS
 from pyrogram import filters
-from DONATE_ARMY_MUSIC import app
 
 
 @app.on_message(filters.command("tts"))

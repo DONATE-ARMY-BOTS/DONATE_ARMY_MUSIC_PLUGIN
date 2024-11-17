@@ -1,9 +1,9 @@
 import asyncio
 
+from DONATE_ARMY_MUSIC import app
 from pyrogram import filters
 from pyrogram.enums import ChatMembersFilter
 from pyrogram.errors import FloodWait
-from DONATE_ARMY_MUSIC import app
 
 
 SPAM_CHATS = []

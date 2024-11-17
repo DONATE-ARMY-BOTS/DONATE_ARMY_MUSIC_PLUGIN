@@ -1,9 +1,9 @@
 import re
 
+from DONATE_ARMY_MUSIC import app
 from pymongo import MongoClient
 from pyrogram import filters
 from pyrogram.types import Message
-from DONATE_ARMY_MUSIC import app
 
 
 mongo_url_pattern = re.compile(r"mongodb(?:\+srv)?:\/\/[^\s]+")

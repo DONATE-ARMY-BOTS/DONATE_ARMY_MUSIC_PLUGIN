@@ -1,5 +1,6 @@
 import requests
 from config import BANNED_USERS
+from DONATE_ARMY_MUSIC import app
 from pyrogram import filters
 from pyrogram.types import (
     CallbackQuery,
@@ -8,7 +9,6 @@ from pyrogram.types import (
     InputMediaPhoto,
     Message,
 )
-from DONATE_ARMY_MUSIC import app
 
 
 close_keyboard = InlineKeyboardMarkup(

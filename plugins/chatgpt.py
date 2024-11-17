@@ -1,8 +1,8 @@
 from config import BANNED_USERS
+from DONATE_ARMY_MUSIC import app
 from pyrogram import filters
 from pyrogram.enums import ChatAction
 from TheApi import api
-from DONATE_ARMY_MUSIC import app
 
 
 @app.on_message(filters.command(["chatgpt", "ai", "ask"]) & ~BANNED_USERS)

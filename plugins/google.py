@@ -1,6 +1,6 @@
+from DONATE_ARMY_MUSIC import app
 from googlesearch import search
 from pyrogram import filters
-from DONATE_ARMY_MUSIC import app
 
 
 @app.on_message(filters.command(["google", "gle"]))

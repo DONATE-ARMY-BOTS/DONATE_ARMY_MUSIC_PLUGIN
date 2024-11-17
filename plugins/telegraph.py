@@ -1,9 +1,9 @@
 import os
 
+from DONATE_ARMY_MUSIC import app
 from pyrogram import filters
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 from TheApi import api
-from DONATE_ARMY_MUSIC import app
 
 
 @app.on_message(filters.command(["tgm", "tgt", "telegraph", "tl"]))

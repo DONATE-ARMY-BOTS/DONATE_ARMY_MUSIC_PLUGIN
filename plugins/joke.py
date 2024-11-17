@@ -1,8 +1,8 @@
 import requests
+from DONATE_ARMY_MUSIC import app
 from pyrogram import filters
 from pyrogram.enums import ParseMode
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
-from DONATE_ARMY_MUSIC import app
 
 
 JOKE_API_ENDPOINT = (

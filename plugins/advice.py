@@ -1,6 +1,6 @@
+from DONATE_ARMY_MUSIC import app
 from pyrogram import filters
 from TheApi import api
-from DONATE_ARMY_MUSIC import app
 
 
 @app.on_message(filters.command("advice"))

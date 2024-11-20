@@ -1,9 +1,9 @@
 #
 # Copyright (C) 2024 by DONATE_ARMY™@Github, < https://github.com/DONATE-ARMY-BOTS >.
 #
-# This file is part of < https://github.com/DONATE-ARMY-BOTS/DONATE_ARMY_MUSIC > project,
+# This file is part of < https://github.com/DONATE-ARMY-BOTS/DONATE_ARMY_TG_MUSIC_PLAYER > project,
 # and is released under the MIT License.
-# Please see < https://github.com/DONATE-ARMY-BOTS/DONATE_ARMY_MUSIC/blob/master/LICENSE >
+# Please see < https://github.com/DONATE-ARMY-BOTS/DONATE_ARMY_TG_MUSIC_PLAYER/blob/master/LICENSE >
 #
 # All rights reserved.
 #
@@ -11,9 +11,10 @@
 import traceback
 from functools import wraps
 
-from config import LOG_GROUP_ID
-from DONATE_ARMY_MUSIC import app
 from pyrogram.errors.exceptions.forbidden_403 import ChatWriteForbidden
+
+from config import LOG_GROUP_ID
+from DONATE_ARMY_TG_MUSIC_PLAYER import app
 
 
 def split_limits(text):

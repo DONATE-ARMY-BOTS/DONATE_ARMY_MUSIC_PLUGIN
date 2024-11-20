@@ -12,7 +12,7 @@
 
 ### 🖇 VPS Deployment
 - Get your [Necessary Variables](https://github.com/DONATE-ARMY-BOTS/DONATE-ARMY-BOTS/DONATE_ARMY_TG_MUSIC_PLAYER/blob/master/sample.env)
-- clone repo : `git clone https://github.com/DONATE-ARMY-BOTS/DONATE_ARMY_TG_MUSIC_PLAYER && cd DONATE_ARMY_TG_MUSIC_PLAYER
+- clone repo : `git clone https://github.com/DONATE-ARMY-BOTS/DONATE_ARMY_TG_MUSIC_PLAYER && cd DONATE_ARMY_TG_MUSIC_PLAYER`
 - Setup by : `bash setup`
 - Install tmux to keep running your bot when you close the terminal by :
 `sudo apt install tmux && tmux`

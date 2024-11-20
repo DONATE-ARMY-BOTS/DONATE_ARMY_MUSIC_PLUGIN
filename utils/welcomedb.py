@@ -1,6 +1,5 @@
 from DONATE_ARMY_TG_MUSIC_PLAYER.core.mongo import mongodb
 
-
 greetingsdb = mongodb.greetings
 
 

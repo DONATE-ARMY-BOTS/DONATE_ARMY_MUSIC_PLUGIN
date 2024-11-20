@@ -1,9 +1,8 @@
 import asyncio
 
+from DONATE_ARMY_TG_MUSIC_PLAYER import app
 from pyrogram import enums, filters
 from pyrogram.errors import FloodWait
-
-from DONATE_ARMY_TG_MUSIC_PLAYER import app
 
 
 @app.on_message(filters.command("bots") & filters.group)

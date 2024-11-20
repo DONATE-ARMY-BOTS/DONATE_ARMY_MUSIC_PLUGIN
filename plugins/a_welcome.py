@@ -3,23 +3,24 @@ import time
 from logging import getLogger
 from time import time
 
-from PIL import Image, ImageChops, ImageDraw, ImageEnhance, ImageFont
-from pyrogram import enums, filters
-from pyrogram.types import ChatMemberUpdated
-
+from config import MONGO_DB_URI
 from DONATE_ARMY_TG_MUSIC_PLAYER import app
 from DONATE_ARMY_TG_MUSIC_PLAYER.utils.database import get_assistant
 from pymongo import MongoClient
-from config import MONGO_DB_URI
+from pyrogram import enums, filters
+from pyrogram.types import ChatMemberUpdated
+
 
 # Define a dictionary to track the last message timestamp for each user
 user_last_message_time = {}
 user_command_count = {}
-# Define the threshold for command spamming (e.g., 20 commands within 60 seconds)
+# Define the threshold for command spamming (e.g., 20 commands within 60
+# seconds)
 SPAM_THRESHOLD = 2
 SPAM_WINDOW_SECONDS = 5
 
 LOGGER = getLogger(__name__)
+
 
 class temp:
     ME = None
@@ -34,20 +35,23 @@ class temp:
 awelcomedb = MongoClient(MONGO_DB_URI)
 astatus_db = awelcomedb.awelcome_status_db.status
 
+
 async def get_awelcome_status(chat_id):
     status = astatus_db.find_one({"chat_id": chat_id})
     if status:
         return status.get("welcome", "on")
     return "on"
 
+
 async def set_awelcome_status(chat_id, state):
     astatus_db.update_one(
-        {"chat_id": chat_id},
-        {"$set": {"welcome": state}},
-        upsert=True
+        {"chat_id": chat_id}, {"$set": {"welcome": state}}, upsert=True
     )
 
+
 # Command to toggle welcome message
+
+
 @app.on_message(filters.command("awelcome") & ~filters.private)
 async def auto_state(_, message):
     user_id = message.from_user.id
@@ -74,7 +78,10 @@ async def auto_state(_, message):
 
     chat_id = message.chat.id
     user = await app.get_chat_member(message.chat.id, message.from_user.id)
-    if user.status in (enums.ChatMemberStatus.ADMINISTRATOR, enums.ChatMemberStatus.OWNER):
+    if user.status in (
+        enums.ChatMemberStatus.ADMINISTRATOR,
+        enums.ChatMemberStatus.OWNER,
+    ):
         state = message.text.split(None, 1)[1].strip().lower()
         current_status = await get_awelcome_status(chat_id)
 
@@ -83,19 +90,30 @@ async def auto_state(_, message):
                 await message.reply_text("** ᴡᴇʟᴄᴏᴍᴇ ɴᴏᴛɪғɪᴄᴀᴛɪᴏɴ ᴀʟʀᴇᴀᴅʏ ᴅɪsᴀʙʟᴇᴅ!**")
             else:
                 await set_awelcome_status(chat_id, "off")
-                await message.reply_text(f"**ᴅɪsᴀʙʟᴇᴅ ᴡᴇʟᴄᴏᴍᴇ ɴᴏᴛɪғɪᴄᴀᴛɪᴏɴ ɪɴ** {message.chat.title} **ʙʏ ᴀssɪsᴛᴀɴᴛ**")
+                await message.reply_text(
+                    f"**ᴅɪsᴀʙʟᴇᴅ ᴡᴇʟᴄᴏᴍᴇ ɴᴏᴛɪғɪᴄᴀᴛɪᴏɴ ɪɴ** {message.chat.title} **ʙʏ ᴀssɪsᴛᴀɴᴛ**"
+                )
         elif state == "on":
             if current_status == "on":
-                await message.reply_text("**ᴇɴᴀʙʟᴇᴅ ᴀssɪsᴛᴀɴᴛ ᴡᴇʟᴄᴏᴍᴇ ɴᴏᴛɪғɪᴄᴀᴛɪᴏɴ ᴀʟʀᴇᴀᴅʏ!**")
+                await message.reply_text(
+                    "**ᴇɴᴀʙʟᴇᴅ ᴀssɪsᴛᴀɴᴛ ᴡᴇʟᴄᴏᴍᴇ ɴᴏᴛɪғɪᴄᴀᴛɪᴏɴ ᴀʟʀᴇᴀᴅʏ!**"
+                )
             else:
                 await set_awelcome_status(chat_id, "on")
-                await message.reply_text(f"**ᴇɴᴀʙʟᴇᴅ ᴀssɪsᴛᴀɴᴛ ᴡᴇʟᴄᴏᴍᴇ ɴᴏᴛɪғɪᴄᴀᴛɪᴏɴ ɪɴ** {message.chat.title}")
+                await message.reply_text(
+                    f"**ᴇɴᴀʙʟᴇᴅ ᴀssɪsᴛᴀɴᴛ ᴡᴇʟᴄᴏᴍᴇ ɴᴏᴛɪғɪᴄᴀᴛɪᴏɴ ɪɴ** {message.chat.title}"
+                )
         else:
             await message.reply_text(usage)
     else:
-        await message.reply("**sᴏʀʀʏ ᴏɴʟʏ ᴀᴅᴍɪɴs ᴄᴀɴ ᴇɴᴀʙʟᴇ ᴀssɪsᴛᴀɴᴛ ᴡᴇʟᴄᴏᴍᴇ ɴᴏᴛɪғɪᴄᴀᴛɪᴏɴ!**")
+        await message.reply(
+            "**sᴏʀʀʏ ᴏɴʟʏ ᴀᴅᴍɪɴs ᴄᴀɴ ᴇɴᴀʙʟᴇ ᴀssɪsᴛᴀɴᴛ ᴡᴇʟᴄᴏᴍᴇ ɴᴏᴛɪғɪᴄᴀᴛɪᴏɴ!**"
+        )
+
 
 # Auto-welcome message for new members
+
+
 @app.on_chat_member_updated(filters.group, group=5)
 async def greet_new_members(_, member: ChatMemberUpdated):
     userbot = await get_assistant(member.chat.id)

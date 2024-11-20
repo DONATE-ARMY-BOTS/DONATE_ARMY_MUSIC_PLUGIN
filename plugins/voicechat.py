@@ -1,30 +1,14 @@
-
-from pyrogram import filters
-from pyrogram.enums import ChatType
-from strings import get_string
 from DONATE_ARMY_TG_MUSIC_PLAYER import app
 from DONATE_ARMY_TG_MUSIC_PLAYER.utils import DONATE_ARMYbin
-
 from DONATE_ARMY_TG_MUSIC_PLAYER.utils.database import get_assistant, get_lang
-import asyncio
-from os import getenv
-from dotenv import load_dotenv
-from pyrogram import Client
-from dotenv import load_dotenv
-import config
+from pyrogram import *
+from pyrogram import filters
+from pyrogram.enums import ChatType
+from pyrogram.types import *
+from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, Message
+from strings import get_string
 
-from DONATE_ARMY_TG_MUSIC_PLAYER.logging import LOGGER
-from DONATE_ARMY_TG_MUSIC_PLAYER.utils.database import (
-    delete_filter,
-    get_cmode,
-    get_lang,
-    is_active_chat,
-    is_commanddelete_on,
-    is_maintenance,
-    is_nonadmin_chat,
-    set_loop,
-)
-from DONATE_ARMY_TG_MUSIC_PLAYER.core.call import DONATE_ARMY
+
 """
 from pyrogram import filters
 from DONATE_ARMY_TG_MUSIC_PLAYER import app
@@ -63,21 +47,12 @@ asyncio.create_task(continuous_check())
 """
 
 
-
-
-
-
-
-
-
-@app.on_message(
-    filters.command(["vcuser", "vcusers", "vcmember", "vcmembers"])
-)
+@app.on_message(filters.command(["vcuser", "vcusers", "vcmember", "vcmembers"]))
 async def vc_members(client, message):
     try:
         language = await get_lang(message.chat.id)
         _ = get_string(language)
-    except:
+    except BaseException:
         _ = get_string("en")
     msg = await message.reply_text(_["V_C_1"])
     userbot = await get_assistant(message.chat.id)
@@ -98,7 +73,7 @@ async def vc_members(client, message):
             else:
                 try:
                     title = (await client.get_users(chat_id)).mention
-                except:
+                except BaseException:
                     title = m.chat.first_name
 
             TEXT += _["V_C_2"].format(
@@ -123,13 +98,6 @@ async def vc_members(client, message):
             )
     except ValueError as e:
         await msg.edit(_["V_C_5"])
-from pyrogram import *
-from pyrogram import filters
-from pyrogram.types import *
-from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, Message
-
-from DONATE_ARMY_TG_MUSIC_PLAYER import app
-
 
 
 @app.on_message(filters.video_chat_members_invited)
@@ -147,8 +115,13 @@ async def brah3(app: app, message: Message):
         add_link = f"https://t.me/{app.username}?startgroup=true"
         reply_text = f"{text} 🤭🤭"
         userbot = await get_assistant(message.chat.id)
-        await message.reply(reply_text, reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton(text="๏ ᴊᴏɪɴ ᴠᴄ ๏", url=add_link)]]))
-        
+        await message.reply(
+            reply_text,
+            reply_markup=InlineKeyboardMarkup(
+                [[InlineKeyboardButton(text="๏ ᴊᴏɪɴ ᴠᴄ ๏", url=add_link)]]
+            ),
+        )
+
     except Exception as e:
         print(f"Error: {e}")
 
@@ -162,7 +135,7 @@ def calculate_math(client, message):
     try:
         result = eval(expression)
         response = f"ᴛʜᴇ ʀᴇsᴜʟᴛ ɪs : {result}"
-    except:
+    except BaseException:
         response = "ɪɴᴠᴀʟɪᴅ ᴇxᴘʀᴇssɪᴏɴ"
     message.reply(response)
 
@@ -199,8 +172,6 @@ async def search(event):
             ]
             await msg.edit(result, link_preview=False, buttons=prev_and_next_btns)
             await session.close()
-
-
 
 
 __MODULE__ = "Mᴀᴛʜ"

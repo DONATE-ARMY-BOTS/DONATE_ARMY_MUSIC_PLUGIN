@@ -1,16 +1,13 @@
+from config import BANNED_USERS
+from DONATE_ARMY_TG_MUSIC_PLAYER import app
 from pyrogram import filters
 from TheApi import api
-
-from DONATE_ARMY_TG_MUSIC_PLAYER import app
-from config import BANNED_USERS
 
 
 @app.on_message(filters.command(["blackpink"]) & ~BANNED_USERS)
 async def chatgpt_chat(client, message):
     if len(message.command) < 2:
-        return await message.reply_text(
-            "/blackpink Radhe Radhe "
-        )
+        return await message.reply_text("/blackpink Radhe Radhe ")
     a = await message.reply_text("Creating BlackPink for You.....")
 
     args = " ".join(message.command[1:])
@@ -19,8 +16,10 @@ async def chatgpt_chat(client, message):
     await message.reply_photo(results)
     try:
         await a.delete()
-    except:
+    except BaseException:
         pass
+
+
 """
 from pyrogram import Client, filters
 import requests
@@ -33,11 +32,11 @@ API_KEY = "your_openai_api_key"  # Replace with your actual API key
 async def generate_image(client, message):
     command = message.command[0].replace("/", "")
     args = " ".join(message.command[1:])
-    
+
     if not args:
         await message.reply_text(f"Please provide a name for the /{command} command, e.g., '/{command} piyush'.")
         return
-    
+
     status_msg = await message.reply_text(f"Creating {command.capitalize()} themed image for '{args}'...")
 
     # Construct the prompt based on the command
@@ -66,7 +65,7 @@ async def generate_image(client, message):
         await message.reply_photo(image_url)
     else:
         await message.reply_text("Failed to generate the image. Please try again later.")
-    
+
     # Delete the status message
     await status_msg.delete()
 

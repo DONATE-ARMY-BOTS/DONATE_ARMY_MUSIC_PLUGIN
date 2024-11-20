@@ -1,10 +1,9 @@
 import time
 
 import pyrogram
-from pyrogram import filters
-
 from DONATE_ARMY_TG_MUSIC_PLAYER import app
 from DONATE_ARMY_TG_MUSIC_PLAYER.misc import SUDOERS
+from pyrogram import filters
 
 
 # Define the spam command handler
@@ -22,7 +21,8 @@ def spam_command(client, message):
         user_to_tag = message.reply_to_message.from_user.mention()
         command_args = message.text.split(".raid", 1)[-1].strip()
 
-        # Check if the user provided a number of times to spam (e.g., .spam 5 Hello)
+        # Check if the user provided a number of times to spam (e.g., .spam 5
+        # Hello)
         try:
             num_times, text_to_spam = command_args.split(maxsplit=1)
             num_times = int(num_times)
@@ -36,7 +36,8 @@ def spam_command(client, message):
             message.reply_text(f"{user_to_tag} **{text_to_spam}**")
             time.sleep(1)  # Add a delay between spam messages
     elif message.reply_to_message:
-        # If no text is provided with the spam command, spam the replied user's message
+        # If no text is provided with the spam command, spam the replied user's
+        # message
         user_to_tag = message.reply_to_message.from_user.mention()
 
         for _ in range(5):  # You can adjust the number of spam messages

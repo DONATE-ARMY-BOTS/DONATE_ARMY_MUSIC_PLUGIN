@@ -1,8 +1,7 @@
 import requests
+from DONATE_ARMY_TG_MUSIC_PLAYER import app
 from pyrogram import filters
 from pyrogram.types import Message
-
-from DONATE_ARMY_TG_MUSIC_PLAYER import app
 
 
 @app.on_message(

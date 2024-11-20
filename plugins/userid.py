@@ -1,7 +1,6 @@
+from DONATE_ARMY_TG_MUSIC_PLAYER import app
 from pyrogram import filters
 from pyrogram.enums import ParseMode
-
-from DONATE_ARMY_TG_MUSIC_PLAYER import app
 
 
 @app.on_message(filters.command("me"))
@@ -68,7 +67,6 @@ async def getid(client, message):
     )
 
 
-
 @app.on_message(filters.command("audioid") & filters.reply)
 async def get_audio_id(client, message):
     if message.reply_to_message.audio or message.reply_to_message.voice:
@@ -78,6 +76,7 @@ async def get_audio_id(client, message):
     else:
         await message.reply_text("Please reply to an audio or voice message.")
 
+
 @app.on_message(filters.command("videoid") & filters.reply)
 async def get_video_id(client, message):
     if message.reply_to_message.video or message.reply_to_message.video_note:
@@ -86,7 +85,6 @@ async def get_video_id(client, message):
         await message.reply_text(f"Video File ID: `{file_id}`")
     else:
         await message.reply_text("Please reply to a video message.")
-
 
 
 __MODULE__ = "Usᴇʀɪᴅ"

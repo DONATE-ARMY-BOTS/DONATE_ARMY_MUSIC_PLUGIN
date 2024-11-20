@@ -2,11 +2,15 @@ import asyncio
 import random
 from typing import Optional, Union
 
+from DONATE_ARMY_TG_MUSIC_PLAYER import app
 from PIL import Image, ImageDraw, ImageFont
 from pyrogram import filters
-from pyrogram.types import ChatMemberUpdated, InlineKeyboardButton, InlineKeyboardMarkup
+from pyrogram.types import (
+    ChatMemberUpdated,
+    InlineKeyboardButton,
+    InlineKeyboardMarkup,
+)
 
-from DONATE_ARMY_TG_MUSIC_PLAYER import app
 
 random_photo = [
     "https://telegra.ph/file/1949480f01355b4e87d26.jpg",
@@ -19,7 +23,9 @@ random_photo = [
 bg_path = "assets/userinfo.png"
 font_path = "assets/hiroko.ttf"
 
-get_font = lambda font_size, font_path: ImageFont.truetype(font_path, font_size)
+
+def get_font(font_size, font_path):
+    return ImageFont.truetype(font_path, font_size)
 
 
 async def get_userinfo_img(

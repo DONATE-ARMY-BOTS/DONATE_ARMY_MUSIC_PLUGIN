@@ -5,6 +5,7 @@ from asyncio import gather
 from traceback import format_exc
 from typing import List
 
+from DONATE_ARMY_TG_MUSIC_PLAYER import app
 from PIL import Image
 from pyrogram import Client, errors, filters, raw
 from pyrogram.errors import (
@@ -18,8 +19,8 @@ from pyrogram.errors import (
 from pyrogram.file_id import FileId
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, Message
 
-from DONATE_ARMY_TG_MUSIC_PLAYER import app
 from utils.error import capture_err
+
 
 BOT_USERNAME = app.username
 
@@ -290,11 +291,20 @@ async def kang(client, message: Message):
             limit += 1
             break
 
-        keyboard = InlineKeyboardMarkup([[InlineKeyboardButton(text="sᴇᴇ ᴘᴀᴄᴋ", url=f"t.me/addstickers/{packname}")]])
-        
-        await msg.edit(f"Sticker Kanged.\nEmoji: {sticker_emoji}", reply_markup=keyboard)
-            
-        
+        keyboard = InlineKeyboardMarkup(
+            [
+                [
+                    InlineKeyboardButton(
+                        text="sᴇᴇ ᴘᴀᴄᴋ", url=f"t.me/addstickers/{packname}"
+                    )
+                ]
+            ]
+        )
+
+        await msg.edit(
+            f"Sticker Kanged.\nEmoji: {sticker_emoji}", reply_markup=keyboard
+        )
+
     except (PeerIdInvalid, UserIsBlocked):
         keyboard = InlineKeyboardMarkup(
             [[InlineKeyboardButton(text="Start", url=f"t.me/{BOT_USERNAME}")]]
@@ -309,8 +319,6 @@ async def kang(client, message: Message):
         )
     except StickerPngDimensions:
         await message.reply_text("The sticker png dimensions are invalid.")
-
-
 
 
 __MODULE__ = "Sᴛɪᴄᴋᴇʀ"

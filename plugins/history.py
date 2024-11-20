@@ -1,13 +1,12 @@
 import asyncio
 import random
 
-from pyrogram import Client, filters
-from pyrogram.raw.functions.messages import DeleteHistory
-from pyrogram.types import Message
-
 from DONATE_ARMY_TG_MUSIC_PLAYER import app
 from DONATE_ARMY_TG_MUSIC_PLAYER.core.userbot import assistants
 from DONATE_ARMY_TG_MUSIC_PLAYER.utils.database import get_client
+from pyrogram import Client, filters
+from pyrogram.raw.functions.messages import DeleteHistory
+from pyrogram.types import Message
 
 
 @app.on_message(filters.command(["sg", "History"]))

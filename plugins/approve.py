@@ -1,16 +1,23 @@
-from pyrogram import filters
-from pyrogram.enums import ChatMembersFilter
-from pyrogram.types import ChatJoinRequest
-from pyrogram.errors.exceptions.bad_request_400 import UserAlreadyParticipant
+from asyncio import sleep
+
 from DONATE_ARMY_TG_MUSIC_PLAYER import app
 from DONATE_ARMY_TG_MUSIC_PLAYER.core.mongo import mongodb
 from DONATE_ARMY_TG_MUSIC_PLAYER.misc import SUDOERS
-from DONATE_ARMY_TG_MUSIC_PLAYER.utils.keyboard import ikb
-from utils.permissions import adminsOnly, member_permissions
-from pyrogram.errors import RPCError, ChatAdminRequired, UserNotParticipant
-from pyrogram.types import ChatPrivileges, Message
-from DONATE_ARMY_TG_MUSIC_PLAYER.misc import SUDOERS
 from DONATE_ARMY_TG_MUSIC_PLAYER.utils.database import get_assistant
+from DONATE_ARMY_TG_MUSIC_PLAYER.utils.keyboard import ikb
+from pyrogram import filters
+from pyrogram.enums import ChatMembersFilter
+from pyrogram.errors.exceptions.bad_request_400 import UserAlreadyParticipant
+from pyrogram.types import (
+    ChatJoinRequest,
+    ChatPrivileges,
+    InlineKeyboardButton,
+    InlineKeyboardMarkup,
+)
+
+from utils.permissions import adminsOnly, member_permissions
+
+
 approvaldb = mongodb.autoapprove
 
 
@@ -103,11 +110,10 @@ async def approval_cb(client, cb):
         "**Aᴜᴛᴏᴀᴘᴘʀᴏᴠᴀʟ ғᴏʀ ᴛʜɪs ᴄʜᴀᴛ: Eɴᴀʙʟᴇᴅ.**", reply_markup=keyboard
     )
 
-from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
-from asyncio import sleep
 
 # Dictionary to track approval tasks by chat_id
 approval_tasks = {}
+
 
 @app.on_message(filters.command("approveall") & filters.group)
 @adminsOnly("can_restrict_members")
@@ -115,35 +121,43 @@ async def approve_all(client, message):
     userbot = await get_assistant(message.chat.id)
     chat_id = message.chat.id
     a = await message.reply_text("ᴡᴀɪᴛ.....")
-    
+
     # Fetch the pending join requests
     pending_users = app.get_chat_join_requests(chat_id)  # This is an async generator
-    
+
     cancel_button = InlineKeyboardMarkup(
-        [[InlineKeyboardButton("CANCEL PROCESS", callback_data=f"cancel_approval:{chat_id}")]]
+        [
+            [
+                InlineKeyboardButton(
+                    "CANCEL PROCESS", callback_data=f"cancel_approval:{chat_id}"
+                )
+            ]
+        ]
     )
-    
+
     # Set approval task as active
     approval_tasks[chat_id] = True
-    
+
     async for user in pending_users:
         if not approval_tasks.get(chat_id):
             await message.reply_text("ᴀᴘᴘʀᴏᴠᴀʟ ᴘʀᴏᴄᴇss ᴄᴀɴᴄᴇʟᴇᴅ.")
             break
-        
+
         try:
-            await app.promote_chat_member(chat_id,
-                                          userbot.id, 
-                                          privileges=ChatPrivileges(
-                                              can_change_info=True, 
-                                              can_invite_users=True,
-                                          ),
-                                          )
-                
-                
+            await app.promote_chat_member(
+                chat_id,
+                userbot.id,
+                privileges=ChatPrivileges(
+                    can_change_info=True,
+                    can_invite_users=True,
+                ),
+            )
+
             # Approving one user at a time
             await userbot.approve_chat_join_request(chat_id, user.from_user.id)
-            await message.reply_text(f"ᴀᴘᴘʀᴏᴠɪɴɢ: {user.from_user.first_name}", reply_markup=cancel_button)
+            await message.reply_text(
+                f"ᴀᴘᴘʀᴏᴠɪɴɢ: {user.from_user.first_name}", reply_markup=cancel_button
+            )
             await sleep(2)  # Delay to simulate step-by-step approval
         except Exception as e:
             await message.reply_text(f"ғᴀɪʟᴇᴅ ᴛᴏ ᴀᴘᴘʀᴏᴠᴇ: Give Me add new admin power.")
@@ -151,9 +165,10 @@ async def approve_all(client, message):
 
     if approval_tasks.get(chat_id):
         await a.edit("ᴀʟʟ ᴘᴇɴᴅɪɴɢ ᴊᴏɪɴ ʀᴇǫᴜᴇsᴛs ᴀᴘᴘʀᴏᴠᴇᴅ!")
-    
+
     # Remove the task after completion
     approval_tasks.pop(chat_id, None)
+
 
 @app.on_callback_query(filters.regex("cancel_approval"))
 async def cancel_approval_callback(client, callback_query):

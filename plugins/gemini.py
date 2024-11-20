@@ -1,8 +1,8 @@
 import requests
+from DONATE_ARMY_TG_MUSIC_PLAYER import app
 from MukeshAPI import api
 from pyrogram import filters
 from pyrogram.enums import ChatAction
-from DONATE_ARMY_TG_MUSIC_PLAYER import app
 
 
 @app.on_message(filters.command(["gemini"]))
@@ -34,14 +34,15 @@ async def gemini_handler(client, message):
         pass
 
 
-
 @app.on_message(filters.group, group=50)
 async def chatbot_handler(client, message):
     await app.send_chat_action(message.chat.id, ChatAction.TYPING)
-    if message.text and any(message.text.startswith(prefix) for prefix in ["!", "/", ".", "?", "@", "#"]):
+    if message.text and any(
+        message.text.startswith(prefix) for prefix in ["!", "/", ".", "?", "@", "#"]
+    ):
         return
 
-    if (message.reply_to_message and message.reply_to_message.from_user.id == app.id):
+    if message.reply_to_message and message.reply_to_message.from_user.id == app.id:
         await client.send_chat_action(message.chat.id, ChatAction.TYPING)
         try:
             user_input = f"""

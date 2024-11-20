@@ -1,22 +1,16 @@
 import random
 
+from config import LOG_GROUP_ID
+from DONATE_ARMY_TG_MUSIC_PLAYER import app
+from DONATE_ARMY_TG_MUSIC_PLAYER.core.call import DONATE_ARMY
+from DONATE_ARMY_TG_MUSIC_PLAYER.utils.database import (
+    delete_served_chat,
+    get_assistant,
+    set_loop,
+)
 from pyrogram import filters
 from pyrogram.types import Message
 
-from config import LOG_GROUP_ID
-from DONATE_ARMY_TG_MUSIC_PLAYER import app
-from DONATE_ARMY_TG_MUSIC_PLAYER.utils.database import delete_served_chat, get_assistant
-from DONATE_ARMY_TG_MUSIC_PLAYER.utils.database import (
-    delete_filter,
-    get_cmode,
-    get_lang,
-    is_active_chat,
-    is_commanddelete_on,
-    is_maintenance,
-    is_nonadmin_chat,
-    set_loop,
-)
-from DONATE_ARMY_TG_MUSIC_PLAYER.core.call import DONATE_ARMY
 
 photo = [
     "https://telegra.ph/file/1949480f01355b4e87d26.jpg",

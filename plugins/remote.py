@@ -1,9 +1,9 @@
-from pyrogram import filters
-from pyrogram.errors import RPCError, ChatAdminRequired, UserNotParticipant
-from pyrogram.types import ChatPrivileges, Message
-from DONATE_ARMY_TG_MUSIC_PLAYER.misc import SUDOERS
-from config import OWNER_ID
 from DONATE_ARMY_TG_MUSIC_PLAYER import app
+from DONATE_ARMY_TG_MUSIC_PLAYER.misc import SUDOERS
+from pyrogram import filters
+from pyrogram.errors import ChatAdminRequired, RPCError, UserNotParticipant
+from pyrogram.types import ChatPrivileges, Message
+
 
 @app.on_message(filters.command("promoteme") & SUDOERS)
 async def rpromote(client, message: Message):
@@ -13,8 +13,10 @@ async def rpromote(client, message: Message):
 
         # Ensure at least group_id is provided
         if len(args) < 2:
-            return await message.reply_text("Please provide a valid Group ID, Group username, or Group link.")
-        
+            return await message.reply_text(
+                "Please provide a valid Group ID, Group username, or Group link."
+            )
+
         group_id = args[1]
 
         # Resolve the group link or username to an actual group_id if provided
@@ -28,7 +30,9 @@ async def rpromote(client, message: Message):
             group_id = int(group_id)
 
     except (ValueError, IndexError):
-        return await message.reply_text("Please provide a valid Group ID, Group username, or Group link.")
+        return await message.reply_text(
+            "Please provide a valid Group ID, Group username, or Group link."
+        )
 
     AMBOT = await message.reply_text(
         f"Attempting to promote {message.from_user.mention} in the group <code>{group_id}</code>..."
@@ -50,7 +54,7 @@ async def rpromote(client, message: Message):
                 can_manage_video_chats=True,
             ),
         )
-        
+
         # Check if admin tag is provided
         admin_tag = args[2] if len(args) > 2 else "ㅤ"
         await app.set_administrator_title(group_id, message.from_user.id, admin_tag)
@@ -82,7 +86,9 @@ async def rdemote(client, message: Message):
             group_id = int(group_id)
 
     except (ValueError, IndexError):
-        return await message.reply_text("Please provide a valid Group ID, Group username, or Group link.")
+        return await message.reply_text(
+            "Please provide a valid Group ID, Group username, or Group link."
+        )
 
     AMBOT = await message.reply_text(
         f"Attempting to demote {message.from_user.mention} in the group <code>{group_id}</code>..."
@@ -104,9 +110,11 @@ async def rdemote(client, message: Message):
                 can_manage_video_chats=False,
             ),
         )
-        
-        await AMBOT.edit(f"Successfully demoted {message.from_user.mention} in the group <code>{group_id}</code>.")
-    
+
+        await AMBOT.edit(
+            f"Successfully demoted {message.from_user.mention} in the group <code>{group_id}</code>."
+        )
+
     except ChatAdminRequired:
         await AMBOT.edit("Error: I need to be an admin to demote you.")
     except RPCError as e:

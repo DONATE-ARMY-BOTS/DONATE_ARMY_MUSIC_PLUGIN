@@ -1,7 +1,9 @@
-from pyrogram import enums, filters
 from DONATE_ARMY_TG_MUSIC_PLAYER import app
+from pyrogram import enums, filters
+
 
 BOT_ID = app.id
+
 
 @app.on_message(filters.command("unbanall"))
 async def unban_all(_, msg):
@@ -46,6 +48,7 @@ async def unban_all(_, msg):
         await msg.reply_text(
             "ᴇɪᴛʜᴇʀ ɪ ᴅᴏɴ'ᴛ ʜᴀᴠᴇ ᴛʜᴇ ʀɪɢʜᴛ ᴛᴏ ʀᴇsᴛʀɪᴄᴛ ᴜsᴇʀs ᴏʀ ʏᴏᴜ ᴀʀᴇ ɴᴏᴛ ɪɴ sᴜᴅᴏ ᴜsᴇʀs ᴏʀ ʏᴏᴜ ᴀʀᴇ ɴᴏᴛ ᴀ ɴᴇᴄᴇssᴀʀʏ ᴀᴅᴍɪɴ"
         )
+
 
 __MODULE__ = "Uɴʙᴀɴᴀʟʟ"
 __HELP__ = """

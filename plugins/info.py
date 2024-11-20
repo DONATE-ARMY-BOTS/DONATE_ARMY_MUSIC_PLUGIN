@@ -4,15 +4,16 @@ import time
 from time import time
 from typing import Optional, Union
 
+from DONATE_ARMY_TG_MUSIC_PLAYER import app
 from PIL import Image, ImageDraw, ImageFont
 from pyrogram import enums, filters
 
-from DONATE_ARMY_TG_MUSIC_PLAYER import app
 
 # Define a dictionary to track the last message timestamp for each user
 user_last_message_time = {}
 user_command_count = {}
-# Define the threshold for command spamming (e.g., 20 commands within 60 seconds)
+# Define the threshold for command spamming (e.g., 20 commands within 60
+# seconds)
 SPAM_THRESHOLD = 2
 SPAM_WINDOW_SECONDS = 5
 
@@ -27,10 +28,13 @@ random_photo = [
 # --------------------------------------------------------------------------------- #
 
 
-get_font = lambda font_size, font_path: ImageFont.truetype(font_path, font_size)
-resize_text = lambda text_size, text: (
-    (text[:text_size] + "...").upper() if len(text) > text_size else text.upper()
-)
+def get_font(font_size, font_path):
+    return ImageFont.truetype(font_path, font_size)
+
+
+def resize_text(text_size, text):
+    return (text[:text_size] + "...").upper() if len(text) > text_size else text.upper()
+
 
 # --------------------------------------------------------------------------------- #
 
@@ -109,7 +113,7 @@ async def userstatus(user_id):
             return "Offline."
         elif x == enums.UserStatus.ONLINE:
             return "Online."
-    except:
+    except BaseException:
         return "**sᴏᴍᴇᴛʜɪɴɢ ᴡʀᴏɴɢ ʜᴀᴘᴘᴇɴᴇᴅ !**"
 
 
@@ -140,7 +144,8 @@ async def userinfo(_, message):
             await hu.delete()
             return
     else:
-        # If more than the spam window time has passed, reset the command count and update the message timestamp
+        # If more than the spam window time has passed, reset the command count
+        # and update the message timestamp
         user_command_count[user_id] = 1
         user_last_message_time[user_id] = current_time
 

@@ -1,11 +1,11 @@
 import asyncio
 import random
 
+from DONATE_ARMY_TG_MUSIC_PLAYER import app
 from pyrogram import filters
 from pyrogram.enums import ChatMemberStatus, ChatType
 from pyrogram.errors import UserNotParticipant
 
-from DONATE_ARMY_TG_MUSIC_PLAYER import app
 
 spam_chats = []
 
@@ -223,7 +223,7 @@ async def mentionall(client, message):
             usrtxt = ""
     try:
         spam_chats.remove(chat_id)
-    except:
+    except BaseException:
         pass
 
 
@@ -271,7 +271,7 @@ async def mention_allvc(client, message):
             usrtxt = ""
     try:
         spam_chats.remove(chat_id)
-    except:
+    except BaseException:
         pass
 
 
@@ -310,7 +310,7 @@ async def cancel_spam(client, message):
     else:
         try:
             spam_chats.remove(message.chat.id)
-        except:
+        except BaseException:
             pass
         return await message.reply("♦ 𝐒𝐭𝐨𝐩𝐩𝐞𝐝..♦")
 

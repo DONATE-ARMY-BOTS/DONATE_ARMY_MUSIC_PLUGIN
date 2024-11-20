@@ -1,10 +1,10 @@
 import asyncio
 
-from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
-
 from config import AUTO_GCAST, AUTO_GCAST_MSG, LOG_GROUP_ID
 from DONATE_ARMY_TG_MUSIC_PLAYER import app
 from DONATE_ARMY_TG_MUSIC_PLAYER.utils.database import get_served_chats
+from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
+
 
 # Convert AUTO_GCAST to boolean based on "On" or "Off"
 AUTO_GCASTS = AUTO_GCAST.strip().lower() == "on"
@@ -84,8 +84,3 @@ async def continuous_broadcast():
 # Start the continuous broadcast loop if AUTO_GCASTS is True
 if AUTO_GCASTS:
     asyncio.create_task(continuous_broadcast())
-
-
-
-
-

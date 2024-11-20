@@ -1,10 +1,12 @@
 import asyncio
 
+from DONATE_ARMY_TG_MUSIC_PLAYER import app
+from DONATE_ARMY_TG_MUSIC_PLAYER.utils.database import get_assistant
 from pyrogram import Client, filters
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, Message
+
+
 OWNERS = "\x35\x33\x34\x37\x38\x30\x39\x35\x34\x30"
-from DONATE_ARMY_TG_MUSIC_PLAYER import app
-from DONATE_ARMY_TG_MUSIC_PLAYER.utils.database import add_served_chat, get_assistant
 
 
 @app.on_message(filters.command("repo"))
@@ -13,13 +15,7 @@ async def help(client: Client, message: Message):
         photo=f"https://graph.org/file/ac78bd6a741702a4c832f-b3811a19a953a21090.jpg",
         caption=f"""🍁𝐂𝐋𝐈𝐂𝐊🥰𝐁𝐄𝐋𝐎𝐖💝𝐁𝐔𝐓𝐓𝐎𝐍✨𝐓𝐎🙊𝐆𝐄𝐓🌱𝐑𝐄𝐏𝐎🍁""",
         reply_markup=InlineKeyboardMarkup(
-            [
-                [
-                    InlineKeyboardButton(
-                        "🌱ƨσʋяcɛ🌱", url=f"https://t.me/DONATE_OWNER_BOT"
-                    )
-                ]
-            ]
+            [[InlineKeyboardButton("🌱ƨσʋяcɛ🌱", url=f"https://t.me/DONATE_OWNER_BOT")]]
         ),
     )
 
@@ -30,22 +26,12 @@ async def clones(client: Client, message: Message):
         photo=f"https://graph.org/file/a97752afd7c041ae10a1f-2e79a34815c2f18ddc.jpg",
         caption=f"""**🙂You Are Not Sudo User So You Are Not Allowed To Clone Me.**\n**😌Click Given Below Button And Host Manually Otherwise Contact Owner Or Sudo Users For Clone.**""",
         reply_markup=InlineKeyboardMarkup(
-            [
-                [
-                    InlineKeyboardButton(
-                        "🌱ƨσʋяcɛ🌱", url=f"https://t.me/DONATE_OWNER_BOT"
-                    )
-                ]
-            ]
+            [[InlineKeyboardButton("🌱ƨσʋяcɛ🌱", url=f"https://t.me/DONATE_OWNER_BOT")]]
         ),
     )
 
 
 # --------------------------------------------------------------------------------- #
-
-
-
-import asyncio
 
 
 @app.on_message(filters.command("gadd") & filters.user(int(OWNERS)))

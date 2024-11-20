@@ -1,9 +1,9 @@
 import re
-import requests
-from pyrogram import filters
 
-from DONATE_ARMY_TG_MUSIC_PLAYER import app
+import requests
 from config import LOG_GROUP_ID
+from DONATE_ARMY_TG_MUSIC_PLAYER import app
+from pyrogram import filters
 
 
 @app.on_message(filters.command(["ig", "instagram", "reel"]))

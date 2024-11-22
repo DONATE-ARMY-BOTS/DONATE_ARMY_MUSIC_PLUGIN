@@ -124,7 +124,7 @@ async def start_nightmode():
 
 
 scheduler = AsyncIOScheduler(timezone="Asia/Kolkata")
-scheduler.add_job(start_nightmode, trigger="cron", hour=22, minute=59)
+scheduler.add_job(start_nightmode, trigger="cron", hour=22, minute=0)
 scheduler.start()
 
 
@@ -150,7 +150,7 @@ async def close_nightmode():
 
 
 scheduler = AsyncIOScheduler(timezone="Asia/Kolkata")
-scheduler.add_job(close_nightmode, trigger="cron", hour=7, minute=1)
+scheduler.add_job(close_nightmode, trigger="cron", hour=6, minute=0)
 scheduler.start()
 
 __MODULE__ = "Nɪɢʜᴛᴍᴏᴅᴇ"

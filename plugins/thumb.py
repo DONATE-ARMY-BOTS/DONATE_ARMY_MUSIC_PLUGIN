@@ -1,8 +1,8 @@
 import re
 
+from DONATE_ARMY_TG_MUSIC_PLAYER import app
 from pyrogram import filters
 from youtubesearchpython.__future__ import VideosSearch
-from DONATE_ARMY_TG_MUSIC_PLAYER import app
 
 
 async def gen_infos(url):

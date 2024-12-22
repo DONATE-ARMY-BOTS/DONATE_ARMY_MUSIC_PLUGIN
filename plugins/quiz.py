@@ -2,9 +2,9 @@ import random
 import time
 
 import requests
+from DONATE_ARMY_TG_MUSIC_PLAYER import app
 from pyrogram import filters
 from pyrogram.enums import ChatAction, PollType
-from DONATE_ARMY_TG_MUSIC_PLAYER import app
 
 
 last_command_time = {}

@@ -2,6 +2,7 @@ import asyncio
 from random import choice
 
 import pyfiglet
+from DONATE_ARMY_TG_MUSIC_PLAYER import app
 from pyrogram import filters
 from pyrogram.errors import FloodWait
 from pyrogram.types import (
@@ -9,7 +10,6 @@ from pyrogram.types import (
     InlineKeyboardButton,
     InlineKeyboardMarkup,
 )
-from DONATE_ARMY_TG_MUSIC_PLAYER import app
 
 
 def figle(text):

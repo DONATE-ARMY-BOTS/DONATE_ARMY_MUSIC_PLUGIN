@@ -1,8 +1,8 @@
 import requests
+from DONATE_ARMY_TG_MUSIC_PLAYER import app
 from MukeshAPI import api
 from pyrogram import filters
 from pyrogram.enums import ChatAction
-from DONATE_ARMY_TG_MUSIC_PLAYER import app
 
 
 @app.on_message(filters.command(["gemini"]))

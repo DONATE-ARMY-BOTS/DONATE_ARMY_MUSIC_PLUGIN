@@ -1,7 +1,7 @@
 import requests
+from DONATE_ARMY_TG_MUSIC_PLAYER import app
 from pyrogram import filters
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
-from DONATE_ARMY_TG_MUSIC_PLAYER import app
 
 
 def get_pypi_info(package_name):

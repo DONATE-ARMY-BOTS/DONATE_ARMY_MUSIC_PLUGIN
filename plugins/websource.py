@@ -1,8 +1,8 @@
 import requests
+from DONATE_ARMY_TG_MUSIC_PLAYER import app
 from pyrogram import filters
 from requests.adapters import HTTPAdapter
 from requests.packages.urllib3.util.retry import Retry
-from DONATE_ARMY_TG_MUSIC_PLAYER import app
 
 
 def download_website(url):

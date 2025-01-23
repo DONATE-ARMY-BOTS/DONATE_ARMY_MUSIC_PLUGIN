@@ -10,4 +10,4 @@ SafoneAPI
 nekos.py
 telegraph
 uuid
-git+https://github.com/Vivekkumar-IN/TheApi@main
+git+https://github.com/Vivekkumar-IN/TheApi@master
